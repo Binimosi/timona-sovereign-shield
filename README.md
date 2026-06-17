@@ -15,7 +15,7 @@ A production-grade, micro-latency Supervisory Technology (SupTech) API interface
 │    - Validate FaydaID against Vault      │
 └──────────────────┬───────────────────────┘
                    │
-         ┌─────────┴─────────┐
+         ┌=========┴=========┐
          ▼ (Valid)           ▼ (Invalid)
 ┌──────────────────┐   ┌─────────────────────────────────┐
 │ Proceed to Layer2│   │ 🚫 HTTP 403: FaydaID Unauthorized│
@@ -27,7 +27,7 @@ A production-grade, micro-latency Supervisory Technology (SupTech) API interface
 │    - Check BrokerID Registry (SIB/62)    │
 └──────────────────┬───────────────────────┘
                    │
-         ┌─────────┴─────────┐
+         ┌=========┴=========┐
          ▼ (Active)          ▼ (Expired/None)
 ┌──────────────────┐   ┌─────────────────────────────────┐
 │ Proceed to Layer3│   │ 🚫 HTTP 403: Insurance Expired  │
@@ -39,7 +39,7 @@ A production-grade, micro-latency Supervisory Technology (SupTech) API interface
 │    - Calculate Risk Score (Amount & MCC) │
 └──────────────────┬───────────────────────┘
                    │
-         ┌─────────┴─────────┐
+         ┌=========┴=========┐
          ▼ (Risk <= 0.6)     ▼ (Risk > 0.6)
 ┌──────────────────┐   ┌─────────────────────────────────┐
 │  PASSTHROUGH     │   │ 🔐 MFA Required                 │
@@ -56,27 +56,43 @@ A production-grade, micro-latency Supervisory Technology (SupTech) API interface
      [ ✅ HTTP 200: Handshake Complete ]
 
 
-{
-  "Error": "Professional Indemnity Insurance Invalid or Expired",
-  "Status": "REJECTED"
-}
+---
 
+## 🛰️ Core System Architecture Callouts
 
-{
-  "ExAI_Scoring": {
-    "Anomaly_Detected": "NONE",
-    "MFA_Required": false,
-    "Risk_Score": 0.4
-  },
-  "Handshake": "COMPLETE",
-  "Identity_Status": "VERIFIED",
-  "Latency_ms": "0.10",
-  "National_Macro_Outlook": {
-    "Distance_to_Goal": "1.55 Trillion",
-    "Target": "100.00 Trillion Birr",
-    "Total_System_Liquidity": "98.45 Trillion Birr"
-  },
-  "Protocol": "TIMONA-v16-RTS"
-}
+### 🔹 Real-Time Risk Routing Interface
+* **Endpoint Path:** /nbe/v1/sovereign-shield
+* **HTTP Method:** POST
+* **Content-Type:** application/json
+* **Engine Framework:** TIMONA-v16-RTS
 
+---
 
+## 📋 Request Payload Parameters Matrix
+
+| JSON Field Key | Data Type | Required | Purpose / System Function |
+| :--- | :--- | :---: | :--- |
+| FaydaID | String | **YES** | Primary national identification credential check. |
+| BrokerID | String | Optional | Unique identification string checking active SIB/62 insurance status. |
+| MCC | String | Optional | Merchant Category Code evaluating high-risk destination routing (e.g., 7995). |
+| Amount | Numeric | Optional | Absolute transaction volume evaluated by the ExAI engine (Default: 0). |
+
+---
+
+## 🧪 Response Matrix Scenarios
+
+### 🚫 HTTP 403 Forbidden — Security Boundary Trigger
+Returned if identity tracking indicators fail validation constraints or agent credentials have expired.
+
+* Status: REJECTED
+* Error: Professional Indemnity Insurance Invalid or Expired
+
+### ✅ HTTP 200 OK — Sovereign Passthrough Complete
+Returned upon successful parameter processing. Dynamic macro analytics compute system tracking milestones live.
+
+* Protocol: TIMONA-v16-RTS
+* Handshake: COMPLETE
+* Identity_Status: VERIFIED
+* Latency_ms: 0.10
+* National_Macro_Outlook_Liquidity: 98.45 Trillion Birr
+* Distance_to_Goal: 1.55 Trillion Birr
