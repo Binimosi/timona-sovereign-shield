@@ -15,7 +15,7 @@ The architecture is explicitly designed to safeguard a scaling **100-Trillion Bi
 
 This software framework serves as the practical implementation sandbox for the macro-financial models and statistical risk profiles detailed in the following peer-reviewed research manuscript:
 
-> **Citation:** Dribsa, Biniyam Mosisa and Kesto, Dr. Dakito Alemu (2026). *"THE RESILIENCE DIVIDE: An Empirical Assessment of Operational Risk Asymmetry and Macro-Financial Stability in Ethiopia’s Banking Sector (2024–2030)."* SSRN Electronic Journal.
+> **Citation:** Dribsa, Biniyam Mosisa and Kesto, Dr. Dakito Alemu (2026). *"THE RESILIENCE DIVIDE: An Empirical Assessment of Operational Risk Asymmetry and Macro-Financial Stability in Ethiopia’s Banking Sector (2024–2030)."* doi.org/10.2139/ssrn.6899005.
 > Under the formal academic supervision and research review parameters of Addis Ababa University.
 
 ---
@@ -46,7 +46,7 @@ Clone this repository and initialize your local environment rules inside your te
 
 ```bash
 # Clone the repository
-git clone [https://github.com/Binimosi/timona-sovereign-shield.git](https://github.com/yourusername/timona-sovereign-shield.git)
+git clone https://github.com/Binimosi/timona-sovereign-shield.git
 cd timona-sovereign-shield
 
 # Install required dependencies
