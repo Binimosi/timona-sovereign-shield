@@ -26,6 +26,8 @@ Returned if identity tracking indicators fail validation constraints or agent cr
   "Status": "REJECTED"
 }
 
+## ✅ HTTP 200 OK — Sovereign Passthrough Complete
+
 {
   "ExAI_Scoring": {
     "Anomaly_Detected": "NONE",
